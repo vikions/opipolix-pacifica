@@ -60,84 +60,14 @@ export default function PeakyCap({
 }: PeakyCapProps) {
   const palette = capStyles[color];
 
-  const buttonStyle: CSSProperties = {
-    appearance: "none",
-    border: `1px solid ${active ? palette.frame : "rgba(148, 163, 184, 0.18)"}`,
-    background: active ? "rgba(13, 19, 33, 0.96)" : "rgba(8, 14, 26, 0.78)",
-    borderRadius: "24px",
-    padding: "14px 14px 16px",
-    width: `${size * 1.72}px`,
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    gap: "10px",
-    cursor: onClick ? "pointer" : "default",
-    boxShadow: active
-      ? `0 0 0 1px ${palette.frame}, 0 0 32px ${palette.glow}, inset 0 1px 0 rgba(255, 255, 255, 0.06)`
-      : "inset 0 1px 0 rgba(255, 255, 255, 0.04)",
-    transform: active ? "translateY(-3px)" : "none",
-    transition:
-      "transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease, background 160ms ease",
-  };
-
-  const imageFrameStyle: CSSProperties = {
-    position: "relative",
-    width: "100%",
-    borderRadius: "18px",
-    overflow: "hidden",
-    background: "linear-gradient(180deg, rgba(15, 23, 42, 0.18), rgba(15, 23, 42, 0.5))",
-    border: `1px solid ${active ? palette.frame : "rgba(148, 163, 184, 0.14)"}`,
-    minHeight: `${size * 1.02}px`,
-  };
-
-  const imageStyle: CSSProperties = {
-    display: "block",
-    width: "100%",
-    height: `${size * 1.02}px`,
-    objectFit: "cover",
-    objectPosition: "center",
-    filter: palette.filter,
-    transform: active ? "scale(1.03)" : "scale(1)",
-    transition: "transform 160ms ease, filter 160ms ease",
-  };
-
-  const overlayStyle: CSSProperties = {
-    position: "absolute",
-    inset: 0,
-    background: active
-      ? `linear-gradient(180deg, transparent 0%, ${palette.glow} 100%)`
-      : "linear-gradient(180deg, transparent 0%, rgba(2, 6, 23, 0.12) 100%)",
-    pointerEvents: "none",
-  };
-
-  const badgeStyle: CSSProperties = {
-    position: "absolute",
-    top: "10px",
-    left: "10px",
-    padding: "4px 8px",
-    borderRadius: "999px",
-    background: "rgba(2, 6, 23, 0.72)",
-    border: `1px solid ${palette.frame}`,
-    color: palette.accent,
-    fontSize: "0.66rem",
-    letterSpacing: "0.08em",
-    textTransform: "uppercase",
-    fontWeight: 700,
-    pointerEvents: "none",
-  };
-
-  const labelStyle: CSSProperties = {
-    color: active ? "#f8fafc" : "#cbd5e1",
-    fontSize: "0.82rem",
-    fontWeight: 700,
-    letterSpacing: "0.08em",
-    textTransform: "uppercase",
-    textAlign: "center",
-    lineHeight: 1.35,
-    minHeight: "2.3em",
-    display: "flex",
-    alignItems: "center",
-  };
+  const customStyle = {
+    "--cap-frame": palette.frame,
+    "--cap-glow": palette.glow,
+    "--cap-accent": palette.accent,
+    "--cap-filter": palette.filter ?? "none",
+    "--cap-width": `${size * 2}px`,
+    "--cap-height": `${size * 1.04}px`,
+  } as CSSProperties;
 
   return (
     <button
@@ -145,14 +75,16 @@ export default function PeakyCap({
       aria-label={label}
       aria-pressed={active}
       onClick={onClick}
-      style={buttonStyle}
+      className={`peaky-cap ${active ? "is-active" : ""}`}
+      data-color={color}
+      style={customStyle}
     >
-      <div style={imageFrameStyle}>
-        <img src={palette.src} alt="" aria-hidden="true" style={imageStyle} />
-        <div style={overlayStyle} />
-        <span style={badgeStyle}>{active ? "Active" : "Desk"}</span>
+      <div className="peaky-cap__frame">
+        <img src={palette.src} alt="" aria-hidden="true" className="peaky-cap__image" />
+        <div className="peaky-cap__overlay" />
+        <span className="peaky-cap__badge">{active ? "Active" : "Desk"}</span>
       </div>
-      <span style={labelStyle}>{label}</span>
+      <span className="peaky-cap__label">{label}</span>
     </button>
   );
 }
