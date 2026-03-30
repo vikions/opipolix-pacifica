@@ -1,5 +1,6 @@
 import { useState, type CSSProperties, type ReactNode } from "react";
 
+import tommySilhouette from "../assets/characters/tommy-silhouette.png";
 import HedgeSuggestion from "./HedgeSuggestion";
 import MarketSignals from "./MarketSignals";
 import PeakyCap from "./PeakyCap";
@@ -26,9 +27,9 @@ const heroStyle: CSSProperties = {
 const heroTopStyle: CSSProperties = {
   display: "flex",
   justifyContent: "space-between",
-  gap: "20px",
+  gap: "28px",
   flexWrap: "wrap",
-  alignItems: "flex-start",
+  alignItems: "stretch",
 };
 
 const eyebrowStyle: CSSProperties = {
@@ -48,6 +49,7 @@ const statStripStyle: CSSProperties = {
   display: "flex",
   gap: "12px",
   flexWrap: "wrap",
+  marginTop: "24px",
 };
 
 const statCardStyle: CSSProperties = {
@@ -63,6 +65,7 @@ const capRailStyle: CSSProperties = {
   gap: "16px",
   flexWrap: "wrap",
   marginTop: "26px",
+  justifyContent: "space-between",
 };
 
 const panelWrapStyle: CSSProperties = {
@@ -102,6 +105,47 @@ const panelBodyStyle: CSSProperties = {
   gridTemplateColumns: "minmax(0, 1fr)",
   gap: "16px",
   minHeight: "320px",
+};
+
+const heroCopyStyle: CSSProperties = {
+  flex: "1 1 520px",
+  minWidth: "280px",
+};
+
+const heroFigureStyle: CSSProperties = {
+  flex: "0 1 330px",
+  minWidth: "260px",
+  padding: "18px 18px 0",
+  borderRadius: "24px",
+  position: "relative",
+  overflow: "hidden",
+  background:
+    "radial-gradient(circle at top, rgba(201, 168, 76, 0.16), transparent 42%), linear-gradient(180deg, rgba(10, 15, 27, 0.78), rgba(9, 14, 27, 0.96))",
+  border: "1px solid rgba(148, 163, 184, 0.14)",
+  display: "flex",
+  alignItems: "flex-end",
+  justifyContent: "center",
+};
+
+const heroFigureImageStyle: CSSProperties = {
+  display: "block",
+  width: "100%",
+  maxWidth: "250px",
+  height: "auto",
+  objectFit: "contain",
+  filter: "drop-shadow(0 12px 32px rgba(0, 0, 0, 0.45))",
+};
+
+const heroFigureCardStyle: CSSProperties = {
+  position: "absolute",
+  top: "18px",
+  right: "18px",
+  maxWidth: "168px",
+  padding: "10px 12px",
+  borderRadius: "14px",
+  background: "rgba(6, 10, 20, 0.74)",
+  border: "1px solid rgba(201, 168, 76, 0.22)",
+  backdropFilter: "blur(10px)",
 };
 
 const navigation = [
@@ -155,7 +199,7 @@ export default function Dashboard() {
     <div style={frameStyle}>
       <section style={heroStyle}>
         <div style={heroTopStyle}>
-          <div style={{ maxWidth: "680px" }}>
+          <div style={heroCopyStyle}>
             <span style={eyebrowStyle}>Pacifica Dispatch</span>
             <h1 style={{ marginTop: 0, marginBottom: "10px", fontSize: "2.5rem" }}>
               Opipolix Pacifica
@@ -164,21 +208,50 @@ export default function Dashboard() {
               A trading desk for Pacifica perps, Polymarket signal shifts, and
               fast hedge calls when the tape starts whispering.
             </p>
+
+            <div style={statStripStyle}>
+              <div style={statCardStyle}>
+                <div style={{ color: "#94a3b8", fontSize: "0.8rem" }}>Venue</div>
+                <strong style={{ color: "#f8fafc", fontSize: "1.1rem" }}>Pacifica</strong>
+              </div>
+              <div style={statCardStyle}>
+                <div style={{ color: "#94a3b8", fontSize: "0.8rem" }}>Signals</div>
+                <strong style={{ color: "#f8fafc", fontSize: "1.1rem" }}>Polymarket</strong>
+              </div>
+              <div style={statCardStyle}>
+                <div style={{ color: "#94a3b8", fontSize: "0.8rem" }}>Mode</div>
+                <strong style={{ color: "#f8fafc", fontSize: "1.1rem" }}>Hedge Engine</strong>
+              </div>
+            </div>
           </div>
 
-          <div style={statStripStyle}>
-            <div style={statCardStyle}>
-              <div style={{ color: "#94a3b8", fontSize: "0.8rem" }}>Venue</div>
-              <strong style={{ color: "#f8fafc", fontSize: "1.1rem" }}>Pacifica</strong>
+          <div style={heroFigureStyle}>
+            <div style={heroFigureCardStyle}>
+              <div
+                style={{
+                  color: "#f1d28c",
+                  fontSize: "0.72rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  marginBottom: "6px",
+                }}
+              >
+                Desk Mood
+              </div>
+              <div style={{ color: "#f8fafc", fontWeight: 700, marginBottom: "4px" }}>
+                Tommy Mode
+              </div>
+              <p style={{ margin: 0, color: "#94a3b8", fontSize: "0.85rem", lineHeight: 1.5 }}>
+                Quiet room. Sharp odds. No wasted motion.
+              </p>
             </div>
-            <div style={statCardStyle}>
-              <div style={{ color: "#94a3b8", fontSize: "0.8rem" }}>Signals</div>
-              <strong style={{ color: "#f8fafc", fontSize: "1.1rem" }}>Polymarket</strong>
-            </div>
-            <div style={statCardStyle}>
-              <div style={{ color: "#94a3b8", fontSize: "0.8rem" }}>Mode</div>
-              <strong style={{ color: "#f8fafc", fontSize: "1.1rem" }}>Hedge Engine</strong>
-            </div>
+
+            <img
+              src={tommySilhouette}
+              alt="Thomas Shelby silhouette"
+              style={heroFigureImageStyle}
+            />
           </div>
         </div>
 
