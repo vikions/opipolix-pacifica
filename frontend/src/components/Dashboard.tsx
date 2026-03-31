@@ -56,14 +56,33 @@ export default function Dashboard() {
   const [activePanel, setActivePanel] = useState<PanelKey>("contracts");
   const currentPanel =
     navigation.find((item) => item.key === activePanel) ?? navigation[0];
+  const marqueeText =
+    "PACIFICA DISPATCH · THE BET · GARRISON BOARD · PACIFICA DISPATCH ·";
 
   return (
     <div className="dashboard-shell">
       <section className="hero-shell">
+        <div className="hero-shell__grain" aria-hidden="true" />
+        <div className="hero-shell__ray hero-shell__ray--left" aria-hidden="true" />
+        <div className="hero-shell__ray hero-shell__ray--right" aria-hidden="true" />
+        <div className="hero-shell__smoke hero-shell__smoke--one" aria-hidden="true" />
+        <div className="hero-shell__smoke hero-shell__smoke--two" aria-hidden="true" />
+
+        <div className="dashboard-marquee" aria-hidden="true">
+          <div className="dashboard-marquee__track">
+            <span>{marqueeText}</span>
+            <span>{marqueeText}</span>
+          </div>
+        </div>
+
         <div className="dashboard-hero">
           <div className="dashboard-copy">
             <span className="dashboard-eyebrow">Pacifica Dispatch</span>
-            <h1>Opipolix Pacifica</h1>
+            <p className="dashboard-kicker">A hedge noir for perpetuals and prediction markets</p>
+            <h1>
+              <span>By order of the</span>
+              <strong>Pacifica desk.</strong>
+            </h1>
             <p className="dashboard-copy__text">
               A trading desk for Pacifica perps, Polymarket signal shifts, and
               fast hedge calls when the tape starts whispering.
@@ -83,6 +102,10 @@ export default function Dashboard() {
                 <strong>Hedge Engine</strong>
               </div>
             </div>
+
+            <p className="dashboard-copy__footnote">
+              Odds shift. Caps tilt. The desk answers before the room catches up.
+            </p>
           </div>
 
           <div className="dashboard-figure">
@@ -99,6 +122,13 @@ export default function Dashboard() {
             />
             <div className="dashboard-figure__shadow" aria-hidden="true" />
           </div>
+        </div>
+      </section>
+
+      <section className="cap-stage">
+        <div className="cap-stage__heading">
+          <span>Choose the room</span>
+          <p>Each cap opens a different corner of the desk.</p>
         </div>
 
         <nav className="cap-rail" aria-label="Dashboard navigation">
@@ -129,7 +159,9 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div className="dashboard-panel-frame">{currentPanel.panel}</div>
+        <div key={currentPanel.key} className="dashboard-panel-frame dashboard-panel-frame--animate">
+          {currentPanel.panel}
+        </div>
       </section>
     </div>
   );
