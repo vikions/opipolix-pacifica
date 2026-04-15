@@ -8,17 +8,19 @@ class Signal(BaseModel):
     market_question: str
     market_slug: str
     related_asset: str
-    pacifica_market: str
-    market_probability: float = Field(ge=0, le=1)
-    probability_change_1h: float
-    probability_change_24h: float
-    volume_24h_usd: float = Field(ge=0)
-    signal_type: Literal["open", "hedge", "press"]
-    trigger_direction: Literal["up", "down"]
+    pacifica_symbol: str
+    signal_type: Literal["lead", "confirm", "fade"]
     suggested_side: Literal["long", "short"]
     confidence: float = Field(ge=0, le=1)
     urgency: Literal["monitor", "elevated", "immediate"]
-    suggested_size_usd: float = Field(gt=0)
-    existing_exposure_usd: float
-    existing_exposure_side: Literal["long", "short", "flat"]
+    suggested_notional_usd: float = Field(gt=0)
+    polymarket_probability: float = Field(ge=0, le=1)
+    polymarket_move_1h: float | None = None
+    polymarket_move_1d: float | None = None
+    polymarket_volume_24h: float = Field(ge=0)
+    pacifica_mark_price: float = Field(gt=0)
+    pacifica_price_change_24h: float
+    pacifica_funding_rate: float
+    pacifica_orderbook_imbalance: float | None = None
+    pacifica_trade_flow_bias: float | None = None
     rationale: str

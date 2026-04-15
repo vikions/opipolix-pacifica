@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.routers import pacifica, polymarket, signals
+from app.routers import dashboard, pacifica, polymarket, signals
 
 app = FastAPI(
     title="opipolix-pacifica API",
@@ -20,6 +20,7 @@ app.add_middleware(
 app.include_router(pacifica.router, prefix="/api/pacifica", tags=["pacifica"])
 app.include_router(polymarket.router, prefix="/api/polymarket", tags=["polymarket"])
 app.include_router(signals.router, prefix="/api/signals", tags=["signals"])
+app.include_router(dashboard.router, prefix="/api/dashboard", tags=["dashboard"])
 
 
 @app.get("/health")

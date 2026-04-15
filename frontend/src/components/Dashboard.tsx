@@ -1,6 +1,7 @@
 import { useState, type ReactNode } from "react";
 
 import tommySilhouette from "../assets/characters/tommy-silhouette.png";
+import { useDashboard } from "../hooks/useDashboard";
 import HedgeSuggestion from "./HedgeSuggestion";
 import MarketSignals from "./MarketSignals";
 import PeakyCap from "./PeakyCap";
@@ -77,10 +78,46 @@ const navigation = [
 
 export default function Dashboard() {
   const [activePanel, setActivePanel] = useState<PanelKey>("contracts");
+  const { data, loading, error } = useDashboard();
+
   const currentPanel =
     navigation.find((item) => item.key === activePanel) ?? navigation[0];
   const marqueeText =
     "POLYMARKET FLOW // PACIFICA PERPS // EVENT DRIFT // HEDGE DESK // ";
+
+  const panelContent: Record<PanelKey, ReactNode> = {
+    contracts: (
+      <PositionsTable
+        markets={data?.pacifica.markets ?? []}
+        summary={data?.pacifica.summary}
+        loading={loading}
+        error={error}
+      />
+    ),
+    reports: (
+      <MarketSignals
+        markets={data?.polymarket.markets ?? []}
+        summary={data?.polymarket.summary}
+        loading={loading}
+        error={error}
+      />
+    ),
+    bet: (
+      <HedgeSuggestion
+        signals={data?.signals.hedges ?? []}
+        summary={data?.signals.summary}
+        loading={loading}
+        error={error}
+      />
+    ),
+    board: (
+      <TraderLeaderboard
+        markets={data?.pacifica.markets ?? []}
+        loading={loading}
+        error={error}
+      />
+    ),
+  };
 
   return (
     <div className="dashboard-shell">
@@ -131,6 +168,12 @@ export default function Dashboard() {
             <p className="dashboard-copy__footnote">
               Detect the move. Map the asset. Check the book. Price the hedge.
             </p>
+
+            {data?.generated_at ? (
+              <p className="dashboard-copy__footnote dashboard-copy__footnote--muted">
+                Live snapshot {new Date(data.generated_at).toLocaleString()}
+              </p>
+            ) : null}
           </div>
 
           <div className="dashboard-figure">
@@ -188,7 +231,7 @@ export default function Dashboard() {
         </div>
 
         <div key={currentPanel.key} className="dashboard-panel-frame dashboard-panel-frame--animate">
-          {currentPanel.panel}
+          {panelContent[currentPanel.key]}
         </div>
       </section>
     </div>
