@@ -41,7 +41,6 @@ const navigation = [
     title: "Open Contracts",
     subtitle: "Live Pacifica perpetual exposure and position inventory.",
     color: "gold" as const,
-    panel: <PositionsTable />,
   },
   {
     key: "reports" as const,
@@ -49,7 +48,6 @@ const navigation = [
     title: "Intelligence Reports",
     subtitle: "Polymarket momentum, sentiment drift, and signal pressure.",
     color: "dark" as const,
-    panel: <MarketSignals />,
   },
   {
     key: "bet" as const,
@@ -57,7 +55,6 @@ const navigation = [
     title: "The Bet",
     subtitle: "Hedge suggestions when prediction odds start to move.",
     color: "red" as const,
-    panel: <HedgeSuggestion />,
   },
   {
     key: "board" as const,
@@ -65,7 +62,6 @@ const navigation = [
     title: "Garrison Board",
     subtitle: "Leaderboard view for top Pacifica operators and performance.",
     color: "gray" as const,
-    panel: <TraderLeaderboard />,
   },
 ] satisfies Array<{
   key: PanelKey;
@@ -73,7 +69,6 @@ const navigation = [
   title: string;
   subtitle: string;
   color: PanelColor;
-  panel: ReactNode;
 }>;
 
 export default function Dashboard() {

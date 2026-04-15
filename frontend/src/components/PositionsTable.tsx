@@ -82,7 +82,11 @@ export default function PositionsTable({
               <span>{formatUsd(market.mark_price)}</span>
               <span>{formatPct(market.price_change_24h)}</span>
               <span>{formatUsd(market.open_interest)}</span>
-              <span>{Number.isFinite(market.spread_bps) ? `${market.spread_bps.toFixed(1)} bps` : "n/a"}</span>
+              <span>
+                {typeof market.spread_bps === "number"
+                  ? `${market.spread_bps.toFixed(1)} bps`
+                  : "n/a"}
+              </span>
             </div>
           ))}
         </div>
