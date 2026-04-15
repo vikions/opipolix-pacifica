@@ -10,6 +10,29 @@ import TraderLeaderboard from "./TraderLeaderboard";
 type PanelKey = "contracts" | "reports" | "bet" | "board";
 type PanelColor = "gold" | "dark" | "red" | "gray";
 
+const dossier = [
+  {
+    label: "Signal Source",
+    value: "Polymarket Drift",
+    note: "Event repricing, conviction changes, and momentum in probabilities.",
+  },
+  {
+    label: "Execution Venue",
+    value: "Pacifica Perps",
+    note: "Directional hedges routed into fast perpetual positioning.",
+  },
+  {
+    label: "Engine",
+    value: "Cross-Market Map",
+    note: "Probability shift, current exposure, and asset linkage scored together.",
+  },
+  {
+    label: "Output",
+    value: "Actionable Hedge",
+    note: "Side, size, urgency, and confidence in one readable decision.",
+  },
+] as const;
+
 const navigation = [
   {
     key: "contracts" as const,
@@ -57,11 +80,14 @@ export default function Dashboard() {
   const currentPanel =
     navigation.find((item) => item.key === activePanel) ?? navigation[0];
   const marqueeText =
-    "PACIFICA DISPATCH · THE BET · GARRISON BOARD · PACIFICA DISPATCH ·";
+    "POLYMARKET FLOW // PACIFICA PERPS // EVENT DRIFT // HEDGE DESK // ";
 
   return (
     <div className="dashboard-shell">
       <section className="hero-shell">
+        <div className="hero-shell__ghost-title" aria-hidden="true">
+          OPIPOLIX
+        </div>
         <div className="hero-shell__grain" aria-hidden="true" />
         <div className="hero-shell__ray hero-shell__ray--left" aria-hidden="true" />
         <div className="hero-shell__ray hero-shell__ray--right" aria-hidden="true" />
@@ -77,42 +103,44 @@ export default function Dashboard() {
 
         <div className="dashboard-hero">
           <div className="dashboard-copy">
-            <span className="dashboard-eyebrow">Pacifica Dispatch</span>
-            <p className="dashboard-kicker">A hedge noir for perpetuals and prediction markets</p>
+            <span className="dashboard-eyebrow">Signal Desk</span>
+            <p className="dashboard-kicker">
+              Event probabilities, perp exposure, and hedge timing
+            </p>
             <h1>
-              <span>By order of the</span>
-              <strong>Pacifica desk.</strong>
+              <span>Odds move.</span>
+              <strong>We hedge first.</strong>
             </h1>
             <p className="dashboard-copy__text">
-              A trading desk for Pacifica perps, Polymarket signal shifts, and
-              fast hedge calls when the tape starts whispering.
+              Opipolix is a cross-market trading desk that watches Polymarket
+              conviction shifts, reads Pacifica perpetual positioning, and turns
+              both into fast hedge ideas with clear direction, sizing, and
+              urgency.
             </p>
 
-            <div className="dashboard-stats">
-              <div className="dashboard-stat-card">
-                <span>Venue</span>
-                <strong>Pacifica</strong>
-              </div>
-              <div className="dashboard-stat-card">
-                <span>Signals</span>
-                <strong>Polymarket</strong>
-              </div>
-              <div className="dashboard-stat-card">
-                <span>Mode</span>
-                <strong>Hedge Engine</strong>
-              </div>
+            <div className="dashboard-dossier">
+              {dossier.map((item) => (
+                <article key={item.label} className="dashboard-dossier__card">
+                  <span>{item.label}</span>
+                  <strong>{item.value}</strong>
+                  <p>{item.note}</p>
+                </article>
+              ))}
             </div>
 
             <p className="dashboard-copy__footnote">
-              Odds shift. Caps tilt. The desk answers before the room catches up.
+              Detect the move. Map the asset. Check the book. Price the hedge.
             </p>
           </div>
 
           <div className="dashboard-figure">
             <div className="dashboard-figure__card">
-              <span className="dashboard-figure__eyebrow">Desk Mood</span>
-              <strong>Tommy Mode</strong>
-              <p>Quiet room. Sharp odds. No wasted motion.</p>
+              <span className="dashboard-figure__eyebrow">Night Desk</span>
+              <strong>Probability Repricing Scanner</strong>
+              <p>
+                When event odds break away from the prior range, the engine checks
+                existing perp exposure before proposing the next posture.
+              </p>
             </div>
 
             <img
@@ -128,7 +156,7 @@ export default function Dashboard() {
       <section className="cap-stage">
         <div className="cap-stage__heading">
           <span>Choose the room</span>
-          <p>Each cap opens a different corner of the desk.</p>
+          <p>One flow: positions, event drift, hedge logic, operator context.</p>
         </div>
 
         <nav className="cap-rail" aria-label="Dashboard navigation">
@@ -154,7 +182,7 @@ export default function Dashboard() {
           </header>
 
           <div className="dashboard-panel-shell__stamp">
-            <span>Selected</span>
+            <span>Current layer</span>
             <strong>{currentPanel.label}</strong>
           </div>
         </div>

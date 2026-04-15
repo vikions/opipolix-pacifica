@@ -26,7 +26,7 @@ body,
 body {
   margin: 0;
   color: var(--text-main);
-  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  font-family: "Manrope", "Segoe UI", sans-serif;
   background:
     radial-gradient(circle at top left, rgba(201, 168, 76, 0.12), transparent 24%),
     radial-gradient(circle at top right, rgba(139, 26, 26, 0.12), transparent 26%),
@@ -45,7 +45,7 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  font-family: "Cormorant Garamond", Georgia, serif;
   letter-spacing: 0.02em;
 }
 

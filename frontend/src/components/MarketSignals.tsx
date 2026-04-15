@@ -2,19 +2,19 @@ const reports = [
   {
     market: "BTC > 70k This Week",
     probability: "58%",
-    move: "+6 pts",
+    move: "+6.7 pts",
     conviction: "High",
   },
   {
-    market: "ETH ETF Approval in Q2",
-    probability: "41%",
-    move: "-3 pts",
+    market: "ETH > 3.6k This Month",
+    probability: "39%",
+    move: "-5.3 pts",
     conviction: "Medium",
   },
   {
-    market: "Fed Cut by July",
-    probability: "63%",
-    move: "+9 pts",
+    market: "SOL Outperform BTC This Week",
+    probability: "64%",
+    move: "+9.4 pts",
     conviction: "High",
   },
 ];

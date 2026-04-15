@@ -1,7 +1,6 @@
 const positions = [
   { market: "BTC-PERP", side: "Long", size: "1.25 BTC", entry: "$68,250" },
-  { market: "ETH-PERP", side: "Short", size: "8.00 ETH", entry: "$3,520" },
-  { market: "SOL-PERP", side: "Long", size: "240 SOL", entry: "$156.40" },
+  { market: "ETH-PERP", side: "Long", size: "18.00 ETH", entry: "$3,520" },
 ];
 
 export default function PositionsTable() {
@@ -16,15 +15,15 @@ export default function PositionsTable() {
       <div className="panel-kpi-grid">
         <article className="panel-kpi-card">
           <span>Notional</span>
-          <strong>$184.2k</strong>
+          <strong>$149.2k</strong>
         </article>
         <article className="panel-kpi-card">
           <span>Net Delta</span>
-          <strong>+0.68</strong>
+          <strong>+1.12</strong>
         </article>
         <article className="panel-kpi-card">
           <span>Leverage</span>
-          <strong>3.4x</strong>
+          <strong>3.1x</strong>
         </article>
       </div>
 
