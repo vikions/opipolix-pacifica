@@ -14,28 +14,32 @@ function formatUsd(value: number) {
   }).format(value);
 }
 
+function formatPct(value: number) {
+  return `${value.toFixed(1)}%`;
+}
+
 export default function TraderLeaderboard({
   markets,
   loading,
   error,
 }: TraderLeaderboardProps) {
-  const leaderboard = markets
-    .slice()
-    .sort((a, b) => b.volume_24h - a.volume_24h)
-    .slice(0, 3)
-    .map((market, index) => {
-      const strength = Math.max(
-        10,
-        Math.min(100, Math.round((market.volume_24h / Math.max(markets[0]?.volume_24h || 1, 1)) * 100))
-      );
+  const sortedMarkets = markets.slice().sort((a, b) => b.volume_24h - a.volume_24h);
+  const maxVolume = sortedMarkets[0]?.volume_24h || 1;
+  const totalVolume = sortedMarkets.reduce((sum, market) => sum + market.volume_24h, 0);
 
-      return {
-        trader: market.symbol,
-        pnl: formatUsd(market.volume_24h),
-        winRate: `${Math.max(1, Math.min(99, 60 - index * 4))}%`,
-        strength,
-      };
-    });
+  const leaderboard = sortedMarkets.slice(0, 3).map((market) => {
+    const strength = Math.max(
+      10,
+      Math.min(100, Math.round((market.volume_24h / Math.max(maxVolume, 1)) * 100))
+    );
+
+    return {
+      trader: market.symbol,
+      pnl: formatUsd(market.volume_24h),
+      volumeShare: totalVolume > 0 ? (market.volume_24h / totalVolume) * 100 : 0,
+      strength,
+    };
+  });
 
   return (
     <section className="desk-panel desk-panel--gray">
@@ -64,7 +68,7 @@ export default function TraderLeaderboard({
               </div>
 
               <div className="leaderboard-row__score">
-                <span>{entry.winRate} WR</span>
+                <span>{formatPct(entry.volumeShare)} Vol Share</span>
                 <div className="leaderboard-row__bar">
                   <div style={{ width: `${entry.strength}%` }} />
                 </div>

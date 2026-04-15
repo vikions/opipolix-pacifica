@@ -76,19 +76,23 @@ export default function PositionsTable({
             <span>Spread</span>
           </div>
 
-          {markets.map((market) => (
-            <div key={market.symbol} className="mini-table__row mini-table__row--contracts">
-              <span>{market.symbol}</span>
-              <span>{formatUsd(market.mark_price)}</span>
-              <span>{formatPct(market.price_change_24h)}</span>
-              <span>{formatUsd(market.open_interest)}</span>
-              <span>
-                {typeof market.spread_bps === "number"
-                  ? `${market.spread_bps.toFixed(1)} bps`
-                  : "n/a"}
-              </span>
-            </div>
-          ))}
+          {markets.map((market) => {
+            const spreadBps = market.spread_bps;
+            const spreadText =
+              spreadBps !== null && Number.isFinite(spreadBps)
+                ? `${spreadBps.toFixed(1)} bps`
+                : "n/a";
+
+            return (
+              <div key={market.symbol} className="mini-table__row mini-table__row--contracts">
+                <span>{market.symbol}</span>
+                <span>{formatUsd(market.mark_price)}</span>
+                <span>{formatPct(market.price_change_24h)}</span>
+                <span>{formatUsd(market.open_interest)}</span>
+                <span>{spreadText}</span>
+              </div>
+            );
+          })}
         </div>
       ) : null}
     </section>

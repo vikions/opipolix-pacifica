@@ -26,6 +26,7 @@ export default function HedgeSuggestion({
   error,
 }: HedgeSuggestionProps) {
   const primary = signals[0] ?? null;
+  const immediateCount = signals.filter((signal) => signal.urgency === "immediate").length;
 
   return (
     <section className="desk-panel desk-panel--red">
@@ -42,7 +43,7 @@ export default function HedgeSuggestion({
         </article>
         <article className="panel-kpi-card">
           <span>Immediate</span>
-          <strong>{summary?.immediate ?? 0}</strong>
+          <strong>{summary?.immediate ?? immediateCount}</strong>
         </article>
         <article className="panel-kpi-card">
           <span>Assets</span>
@@ -50,9 +51,11 @@ export default function HedgeSuggestion({
         </article>
       </div>
 
-      {error ? <p className="panel-state">{error}</p> : null}
-      {loading ? <p className="panel-state">Loading hedge suggestions...</p> : null}
-      {!loading && !error && !primary ? (
+      {loading ? (
+        <p className="panel-state">Loading hedge suggestions...</p>
+      ) : error ? (
+        <p className="panel-state">{error}</p>
+      ) : !primary ? (
         <p className="panel-state">No active hedge suggestions right now.</p>
       ) : null}
 
