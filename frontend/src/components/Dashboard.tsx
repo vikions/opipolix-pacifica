@@ -178,14 +178,6 @@ export default function Dashboard() {
               className="dashboard-figure__image"
             />
             <div className="dashboard-figure__shadow" aria-hidden="true" />
-            <div className="dashboard-figure__card">
-              <span className="dashboard-figure__eyebrow">Night Desk</span>
-              <strong>Probability Repricing Scanner</strong>
-              <p>
-                When event odds break away from the prior range, the engine checks
-                existing perp exposure before proposing the next posture.
-              </p>
-            </div>
           </div>
         </div>
       </section>
