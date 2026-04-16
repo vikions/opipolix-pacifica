@@ -172,6 +172,12 @@ export default function Dashboard() {
           </div>
 
           <div className="dashboard-figure">
+            <img
+              src={tommySilhouette}
+              alt="Thomas Shelby silhouette"
+              className="dashboard-figure__image"
+            />
+            <div className="dashboard-figure__shadow" aria-hidden="true" />
             <div className="dashboard-figure__card">
               <span className="dashboard-figure__eyebrow">Night Desk</span>
               <strong>Probability Repricing Scanner</strong>
@@ -180,13 +186,6 @@ export default function Dashboard() {
                 existing perp exposure before proposing the next posture.
               </p>
             </div>
-
-            <img
-              src={tommySilhouette}
-              alt="Thomas Shelby silhouette"
-              className="dashboard-figure__image"
-            />
-            <div className="dashboard-figure__shadow" aria-hidden="true" />
           </div>
         </div>
       </section>
